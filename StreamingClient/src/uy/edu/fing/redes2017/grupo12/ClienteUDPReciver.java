@@ -35,9 +35,10 @@ public class ClienteUDPReciver  extends Thread{
 
 	DatagramSocket socketCliente;
 	InetAddress dirSer ;
-	 int puerto ;
-	 ClienteUDPManager cudpm;
-		DisplayFrameJFrame jframe;
+	int puerto ;
+	ClienteUDPManager cudpm;
+	DisplayFrameJFrame jframe;
+	
 	public ClienteUDPReciver(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm)
 	{
 
@@ -45,32 +46,29 @@ public class ClienteUDPReciver  extends Thread{
 		this.dirSer=h;
 		this.puerto=p;
 		this.cudpm=cudpm;
+	
 	}
-
-
 
 	@Override
 	public void run() {		
 				
-        	
-		
-		while (true)
-		{
+		while (true){
 	
 			DatagramPacket pr= new DatagramPacket(new byte[65000], 65000);
 			try {
-				socketCliente.receive(pr);
 				
+				socketCliente.receive(pr);
 				int length = pr.getLength();     // read length of incoming message
 				if(length>0) {
-				    byte[] recived = pr.getData();
+				    
+					byte[] recived = pr.getData();
 
 				    DataInputStream di= new DataInputStream(new ByteArrayInputStream(recived));
 				    Long nump=di.readLong();
 				    
 				    byte[] message = new byte[65000];
 				    di.read(message);
-					    cudpm.packPend.put(nump,message);
+				    cudpm.packPend.put(nump,message);
 				    
 				}
 
@@ -78,17 +76,9 @@ public class ClienteUDPReciver  extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 					
 		}		
 		//socketCliente.close();
-
-
-		// TODO Auto-generated method stub
-			}
-	
-	
-	 
-	 
+	}
 	
 }

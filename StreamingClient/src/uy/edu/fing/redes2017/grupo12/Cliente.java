@@ -30,9 +30,9 @@ public class Cliente   {
     
 
 	static String host =null;
+	static int puerto=0;
+	static JFrame frame;
 	
-	 static int puerto=0;
-	 static JFrame frame;
 	public  static void main(String[] args) throws Exception  {
 		
 		
@@ -44,10 +44,9 @@ public class Cliente   {
 		} else if (args.length == 1) {
 			puerto = new Integer(args[0]);
 		}
-		 JPanel contentPane;
+		JPanel contentPane;
 		
-		
-	 frame = new JFrame("Streaming");
+		frame = new JFrame("Streaming");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100, 100, 650, 490);
 	    contentPane = new JPanel();
@@ -88,31 +87,30 @@ ctcp.start();
 	}
 	
 	 
-	public static void clienteTCP() throws Exception
-	{
+	public static void clienteTCP() throws Exception{
+		
 		if(host==null)
 			host = "localhost";
 		if(puerto==0)
-		 puerto =6789;
+			puerto =6789;
 
 		ClienteTCPManager ctcp=new ClienteTCPManager(host, puerto);
 		ctcp.start();
 		frame.dispose();
+	
 	}
-	public static void clienteUDP() throws Exception
-	{
+	
+	public static void clienteUDP() throws Exception{
+		
 		if(host==null)
-				host = "localhost";
+			host = "localhost";
 		if(puerto==0)
-		 puerto =  9876;
+			puerto =  9876;
 
 		ClienteUDPManager cudp=new ClienteUDPManager(host, puerto);
 		cudp.start();
 		frame.dispose();
+	
 	}
 	 
-	 
-	 
-	 
-	
 }

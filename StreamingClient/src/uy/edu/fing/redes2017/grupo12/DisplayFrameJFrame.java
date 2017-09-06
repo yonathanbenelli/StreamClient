@@ -14,25 +14,24 @@ public class DisplayFrameJFrame extends JFrame{
 	 */
 	private  JPanel contentPane;
 	private  BufferedImage image;
-	public DisplayFrameJFrame()
-	{
+	
+	public DisplayFrameJFrame(){
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 650, 490);
 	    contentPane = new JPanel();
 	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	    setContentPane(contentPane);
 	    contentPane.setLayout(null);
-	    
-	
-	
+	   
 	}
 	
     public void paint(Graphics g){
         g = contentPane.getGraphics();
         g.drawImage(image, 0, 0, this);
     }
-    public void nuevoFrame(BufferedImage i)
-    {
+    
+    public void nuevoFrame(BufferedImage i){	
     	image=i;
     	repaint();
     }

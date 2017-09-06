@@ -32,21 +32,20 @@ public class ClienteUDPSender extends Thread {
 
 	DatagramSocket socketCliente;
 	InetAddress dirSer ;
-	 int puerto ;
-	 ClienteUDPManager cudpm;
-	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm)
-	{
+	int puerto ;
+	ClienteUDPManager cudpm;
+	
+	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
+		
 		this.socketCliente=s;
 		this.dirSer=h;
 		this.puerto=p;
 		this.cudpm=cudpm;
+		
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-
-			
 		
 		while (true)
 		{
@@ -54,6 +53,7 @@ public class ClienteUDPSender extends Thread {
 			String msg=("test:"+cudpm.numpack);
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
 			try {
+				
 				socketCliente.send(pe);
 				cudpm.numpack++;
 				
@@ -69,12 +69,7 @@ public class ClienteUDPSender extends Thread {
 			}
 			
 		}
-			
-		
+				
 	}
-	
-	 
-	 
-	 
 	
 }
