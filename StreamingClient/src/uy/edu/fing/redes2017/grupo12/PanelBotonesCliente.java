@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelBotonesCliente extends JPanel {
+	
+	private static final long serialVersionUID = -5666017896171978022L;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
 	private InterfazClientePrincipal principal;
