@@ -9,9 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 public class DisplayFrameJFrame extends JFrame{
 
-	/**
-	 * @param args
-	 */
+	private static final long serialVersionUID = -4863046612292887293L;
 	private  JPanel contentPane;
 	private  BufferedImage image;
 	
@@ -27,12 +25,16 @@ public class DisplayFrameJFrame extends JFrame{
 	}
 	
     public void paint(Graphics g){
+    	
         g = contentPane.getGraphics();
         g.drawImage(image, 0, 0, this);
+    
     }
     
     public void nuevoFrame(BufferedImage i){	
+    
     	image=i;
     	repaint();
+    
     }
 }

@@ -14,9 +14,6 @@ public class PanelBotonesCliente extends JPanel {
 	private JButton btnCancelar;
 	private InterfazClientePrincipal principal;
 
-	/**
-	 * Create the panel.
-	 */
 	public PanelBotonesCliente() {
 		setLayout(new GridLayout(2, 3, 5, 5));
 		

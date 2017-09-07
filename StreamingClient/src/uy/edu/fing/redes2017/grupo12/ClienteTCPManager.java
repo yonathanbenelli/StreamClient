@@ -1,32 +1,19 @@
 package uy.edu.fing.redes2017.grupo12;
 
-import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
-
 
 public class ClienteTCPManager extends Thread {
     
-	DisplayFrameJFrame jframe ;
-	Socket socketCliente ;
+	private DisplayFrameJFrame jframe ;
+	private Socket socketCliente ;
 	
 	public ClienteTCPManager(String host, int puerto) throws Exception  {
 		
@@ -55,7 +42,7 @@ public class ClienteTCPManager extends Thread {
 					Mat img = Highgui.imdecode(new MatOfByte(message),  Highgui.CV_LOAD_IMAGE_COLOR);
 			    
 					int type = BufferedImage.TYPE_BYTE_GRAY;
-					if ( img.channels() > 1 ) {
+					if (img.channels() > 1) {
 						type = BufferedImage.TYPE_3BYTE_BGR;
 					}
 					BufferedImage image = new BufferedImage(img.cols(),img.rows(), type);
@@ -65,9 +52,8 @@ public class ClienteTCPManager extends Thread {
 				};
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} // read length of incoming message
+			}
 			
 		}		
 

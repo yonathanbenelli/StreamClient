@@ -2,28 +2,24 @@ package uy.edu.fing.redes2017.grupo12;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JRadioButton;
-import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelClienteDatos extends JPanel {
+
+	private static final long serialVersionUID = 2864132310961409436L;
 	private JTextField tfPuerto;
 	private JRadioButton rdbtnUDP;
 	private JRadioButton rdbtnTCP;
 	private JFormattedTextField ftIP;
 
-	/**
-	 * Create the panel.
-	 */
 	public PanelClienteDatos() {
 		setLayout(new GridLayout(6, 3, 5, 5));
 		
@@ -104,13 +100,17 @@ public class PanelClienteDatos extends JPanel {
 	public JRadioButton getRdbtnUDP() {
 		return rdbtnUDP;
 	}
+	
 	public JRadioButton getRdbtnTCP() {
 		return rdbtnTCP;
 	}
+	
 	public JTextField getTfPuerto() {
 		return tfPuerto;
 	}
+	
 	public JFormattedTextField getFtIP() {
 		return ftIP;
 	}
+	
 }

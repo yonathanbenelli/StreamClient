@@ -10,16 +10,17 @@ import org.opencv.core.Core;
 
 public class Cliente extends JFrame  {
     
-
 	private static final long serialVersionUID = 3167419079621291526L;
-	String host;
-	int puerto;
-	static JFrame frameVideo;
+	private String host;
+	private int puerto;
+	private static JFrame frameVideo;
 	
 	public Cliente(int puerto, String host){
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.puerto = puerto;
 		this.host = host;
+	
 	}
 	
 	public void arranca() throws Exception  {
@@ -34,13 +35,13 @@ public class Cliente extends JFrame  {
 	    contentPane = new JPanel();
 	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	    frameVideo.setContentPane(contentPane);
-	    frameVideo.setVisible(true);   
+	    frameVideo.setVisible(true);
 	    
 	}
 	 
 	public void clienteTCP() throws Exception{
 				
-    	ClienteTCPManager ctcp= new ClienteTCPManager(host, puerto);
+    	ClienteTCPManager ctcp = new ClienteTCPManager(host, puerto);
     	ctcp.start();
     	frameVideo.dispose(); 
 		
