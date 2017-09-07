@@ -39,6 +39,7 @@ public class ClienteUDPManager extends Thread{
 	DatagramSocket socketCliente;
 	InetAddress dirSer;
 	int puerto;
+	long frmAnt=0;
 	
 	public ClienteUDPManager(String host, int puerto) throws Exception{
 		
@@ -73,8 +74,12 @@ public class ClienteUDPManager extends Thread{
 		if(it.hasNext()){
 			
 			Long key=it.next();
-			if(pl.get(key).length>0)
+		//	if(pl.get(key).length>0)
+			if(key<frmAnt)
+			{
 				muestroFrame(pl.get(key));
+				frmAnt=key;
+			}
 			packPend.remove(key);
 		
 		}

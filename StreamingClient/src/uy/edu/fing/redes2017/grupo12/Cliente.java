@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -89,15 +91,24 @@ ctcp.start();
 	 
 	public static void clienteTCP() throws Exception{
 		
+       	//Primera pasada del timer.
+		
 		if(host==null)
-			host = "localhost";
-		if(puerto==0)
-			puerto =6789;
+    		host = "localhost";
+    	if(puerto==0)
+    		puerto =6789;
 
-		ClienteTCPManager ctcp=new ClienteTCPManager(host, puerto);
-		ctcp.start();
-		frame.dispose();
-	
+    	ClienteTCPManager ctcp= new ClienteTCPManager(host, puerto);
+    	ctcp.start();
+    	frame.dispose();
+        
+		//Definicion timer.
+    	
+		
+	   
+	     
+	    
+		
 	}
 	
 	public static void clienteUDP() throws Exception{
@@ -110,6 +121,7 @@ ctcp.start();
 		ClienteUDPManager cudp=new ClienteUDPManager(host, puerto);
 		cudp.start();
 		frame.dispose();
+		
 	
 	}
 	 

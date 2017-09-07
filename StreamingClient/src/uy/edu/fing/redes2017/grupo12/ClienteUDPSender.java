@@ -15,7 +15,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import javax.management.timer.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -34,6 +36,7 @@ public class ClienteUDPSender extends Thread {
 	InetAddress dirSer ;
 	int puerto ;
 	ClienteUDPManager cudpm;
+	boolean inicio=false;
 	
 	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
 		
@@ -42,31 +45,40 @@ public class ClienteUDPSender extends Thread {
 		this.puerto=p;
 		this.cudpm=cudpm;
 		
+		
 	}
 
 	@Override
 	public void run() {
 		
 		while (true)
-		{
+		{ 
 			
-			String msg=("test:"+cudpm.numpack);
+			String msg;
+			if (!inicio)
+			{
+				msg=("inicio");
+				this.inicio=true;
+			}
+			else
+			{
+				msg=("renovar");
+				
+			}
+				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
 			try {
 				
 				socketCliente.send(pe);
-				cudpm.numpack++;
-				
-			} catch (IOException e) {
+				//cudpm.numpack++;
+				TimeUnit.MILLISECONDS.sleep(30000);
+			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			try {
-				this.sleep(1000/30);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			
+			
+		
 			
 		}
 				
