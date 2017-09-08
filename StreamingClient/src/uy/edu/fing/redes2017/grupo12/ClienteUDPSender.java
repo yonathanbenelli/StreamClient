@@ -40,16 +40,19 @@ public class ClienteUDPSender extends Thread {
 			}
 				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
-			try{
+			
 				
-				socketCliente.send(pe);
-				TimeUnit.MILLISECONDS.sleep(30000);
+				try {
+					socketCliente.send(pe);
+					Thread.sleep(30000);
+					
+				} catch (IOException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			
-			} catch (IOException | InterruptedException e){
-				e.printStackTrace();
-			}
-			
-			
+		
 		
 			
 		}

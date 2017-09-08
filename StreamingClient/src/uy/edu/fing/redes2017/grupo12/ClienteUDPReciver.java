@@ -44,6 +44,7 @@ public class ClienteUDPReciver  extends Thread{
 				    
 				    byte[] message = new byte[65000];
 				    di.read(message);
+				    
 				    cudpm.packPend.put(nump,message);
 				    
 				}
