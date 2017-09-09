@@ -21,22 +21,6 @@ public class InterfazClientePrincipal extends JFrame {
 	private PanelClienteDatos panelClienteDatos;
 	private PanelBotonesCliente panelBotonesCliente;
 	private Cliente cliente;
-
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InterfazClientePrincipal frame = new InterfazClientePrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-	}
-
 	public InterfazClientePrincipal() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 916, 299);
