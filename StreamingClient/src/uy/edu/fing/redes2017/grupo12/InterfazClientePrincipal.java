@@ -8,9 +8,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import excepciones.excepcionDebeSeleccionar;
 import excepciones.excepcionNoEsIP;
 import excepciones.excepcionNoEsPuerto;
 import excepciones.excepcionNoSeleccionoConexion;
+import excepciones.excepcionNombreDominioVacio;
 
 public class InterfazClientePrincipal extends JFrame {
 
@@ -63,18 +65,32 @@ public class InterfazClientePrincipal extends JFrame {
 		try{
 			
 			String ip = panelClienteDatos.getFtIP().getText();
+			String dominio = panelClienteDatos.getTfNombreDominio().getText();
 			
-			if (ip.equals(""))
+			if (ip.equals("") && dominio.equals(""))
+				throw new excepcionDebeSeleccionar();
+			
+			if (panelClienteDatos.getRdbtnNombreDeDominio().isSelected() && dominio.equals(""))
+				throw new excepcionNombreDominioVacio();
+			
+			if (panelClienteDatos.getRdbtnDireccinIp().isSelected() && ip.equals(""))
 				throw new excepcionNoEsIP();
 			
-			String[] partesIP = new String[4];
-			partesIP = ip.split("\\.");
-			int primero = Integer.parseInt(partesIP[0]);
-			int segundo = Integer.parseInt(partesIP[1]);
-			int tercero = Integer.parseInt(partesIP[2]);
-			int cuarto = Integer.parseInt(partesIP[3]);
-			if  (!((0 <= primero) && (primero <= 255) && (0 <= segundo) && (segundo <= 255) && (0 <= tercero) && (tercero <= 255) && (0 <= cuarto) && (cuarto <= 255)))
-				throw new excepcionNoEsIP();
+			if (!panelClienteDatos.getRdbtnDireccinIp().isSelected() && !panelClienteDatos.getRdbtnNombreDeDominio().isSelected())
+				throw new excepcionDebeSeleccionar();
+			
+			if (panelClienteDatos.getRdbtnDireccinIp().isSelected()){
+				
+				String[] partesIP = new String[4];
+				partesIP = ip.split("\\.");
+				int primero = Integer.parseInt(partesIP[0]);
+				int segundo = Integer.parseInt(partesIP[1]);
+				int tercero = Integer.parseInt(partesIP[2]);
+				int cuarto = Integer.parseInt(partesIP[3]);
+				if  (!((0 <= primero) && (primero <= 255) && (0 <= segundo) && (segundo <= 255) && (0 <= tercero) && (tercero <= 255) && (0 <= cuarto) && (cuarto <= 255)))
+					throw new excepcionNoEsIP();
+				
+			}
 			
 			String puerto = panelClienteDatos.getTfPuerto().getText();
 			int p = Integer.parseInt(puerto);
@@ -86,7 +102,11 @@ public class InterfazClientePrincipal extends JFrame {
 			
 			//Si pasa los chequeos creamos la instancia del Cliente.
 			
-		    cliente = new Cliente(p,ip); 
+			if (panelClienteDatos.getRdbtnNombreDeDominio().isSelected())
+				cliente = new Cliente(p,dominio);
+			else if (panelClienteDatos.getRdbtnDireccinIp().isSelected())
+				cliente = new Cliente(p,ip);
+			
 		    cliente.arranca();
 		    
 		    if (panelClienteDatos.getRdbtnUDP().isSelected())
@@ -100,6 +120,10 @@ public class InterfazClientePrincipal extends JFrame {
 			JOptionPane.showMessageDialog(null, "No ingresó un número de puerto válido.", "Error", JOptionPane.ERROR_MESSAGE);
 		} catch (excepcionNoSeleccionoConexion e) {
 			JOptionPane.showMessageDialog(null, "No selecciono ningún tipo de conexión.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (excepcionDebeSeleccionar e) {
+			JOptionPane.showMessageDialog(null, "Debe seleccionar nombre de dominio o dirección ip.", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (excepcionNombreDominioVacio e) {
+			JOptionPane.showMessageDialog(null, "Debe seleccionar nombre de dominio o dirección ip.", "Error", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

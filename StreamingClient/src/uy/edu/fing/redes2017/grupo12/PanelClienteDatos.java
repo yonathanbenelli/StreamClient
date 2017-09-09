@@ -19,9 +19,12 @@ public class PanelClienteDatos extends JPanel {
 	private JRadioButton rdbtnUDP;
 	private JRadioButton rdbtnTCP;
 	private JFormattedTextField ftIP;
+	private JTextField tfNombreDominio;
+	private JRadioButton rdbtnNombreDeDominio;
+	private JRadioButton rdbtnDireccinIp;
 
 	public PanelClienteDatos() {
-		setLayout(new GridLayout(6, 3, 5, 5));
+		setLayout(new GridLayout(9, 3, 5, 5));
 		
 		JLabel label = new JLabel("");
 		add(label);
@@ -41,6 +44,61 @@ public class PanelClienteDatos extends JPanel {
 		JLabel label_5 = new JLabel("");
 		add(label_5);
 		
+		JLabel lblServidor = new JLabel("Servidor:");
+		add(lblServidor);
+		
+		JLabel label_4 = new JLabel("");
+		add(label_4);
+		
+		rdbtnNombreDeDominio = new JRadioButton("Nombre de dominio");
+		rdbtnNombreDeDominio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnNombreDeDominio.isSelected()){
+					rdbtnDireccinIp.setSelected(false);
+					tfNombreDominio.setEditable(true);
+					ftIP.setEditable(false);
+				} else{
+					rdbtnNombreDeDominio.setSelected(false);
+					tfNombreDominio.setEditable(false);
+					ftIP.setEditable(true);
+				}
+			}
+		});
+		add(rdbtnNombreDeDominio);
+		
+		JLabel label_11 = new JLabel("");
+		add(label_11);
+		
+		JLabel label_12 = new JLabel("");
+		add(label_12);
+		
+		rdbtnDireccinIp = new JRadioButton("Dirección IP");
+		rdbtnDireccinIp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnDireccinIp.isSelected()){
+					rdbtnNombreDeDominio.setSelected(false);
+					tfNombreDominio.setEditable(false);
+					ftIP.setEditable(true);
+				} else {
+					rdbtnNombreDeDominio.setSelected(false);
+					tfNombreDominio.setEditable(false);
+					ftIP.setEditable(true);
+				}
+			}
+		});
+		add(rdbtnDireccinIp);
+		
+		JLabel lblNombreDeDominio = new JLabel("Nombre de dominio");
+		add(lblNombreDeDominio);
+		
+		JLabel label_14 = new JLabel("");
+		add(label_14);
+		
+		tfNombreDominio = new JTextField();
+		tfNombreDominio.setEditable(false);
+		add(tfNombreDominio);
+		tfNombreDominio.setColumns(10);
+		
 		JLabel lblIngreseLaDireccin = new JLabel("Ingrese la dirección IP del servidor");
 		add(lblIngreseLaDireccin);
 		
@@ -50,6 +108,7 @@ public class PanelClienteDatos extends JPanel {
 		try {
 		    MaskFormatter mf = new MaskFormatter("###.###.###.###");
 			ftIP = new JFormattedTextField(mf);
+			ftIP.setEditable(false);
 		    add(ftIP);
 		} catch (ParseException e) {
 		    e.printStackTrace();
@@ -76,6 +135,7 @@ public class PanelClienteDatos extends JPanel {
 		rdbtnUDP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnTCP.setSelected(false);
+				tfPuerto.setText("8086");
 			}
 		});
 		add(rdbtnUDP);
@@ -91,6 +151,7 @@ public class PanelClienteDatos extends JPanel {
 		rdbtnTCP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnUDP.setSelected(false);
+				tfPuerto.setText("8085");
 			}
 		});
 		add(rdbtnTCP);
@@ -113,4 +174,13 @@ public class PanelClienteDatos extends JPanel {
 		return ftIP;
 	}
 	
+	public JRadioButton getRdbtnNombreDeDominio() {
+		return rdbtnNombreDeDominio;
+	}
+	public JRadioButton getRdbtnDireccinIp() {
+		return rdbtnDireccinIp;
+	}
+	public JTextField getTfNombreDominio() {
+		return tfNombreDominio;
+	}
 }
