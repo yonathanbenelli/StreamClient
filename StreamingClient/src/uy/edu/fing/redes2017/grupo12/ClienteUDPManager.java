@@ -15,7 +15,7 @@ import org.opencv.highgui.Highgui;
 
 public class ClienteUDPManager extends Thread{
     
-	volatile Map<Long,byte[]> packPend = new HashMap<Long, byte[]>();
+	
 	Long numpack = 0L;
 	DisplayFrameJFrame jframe ;
 	DatagramSocket socketCliente;
@@ -42,31 +42,9 @@ public class ClienteUDPManager extends Thread{
 		cs.start();
 		ClienteUDPReciver cr = new ClienteUDPReciver(socketCliente, dirSer, puerto, this);
 		cr.start();
-		while (true)
-			muestroOrdenados();
-		
+	
 	}
 
-	void muestroOrdenados(){
-		
-		Map<Long,byte[]> pl = packPend;
-		Iterator<Long> it = pl.keySet().iterator();
-		
-		if(it.hasNext()){
-			
-			Long key = it.next();
-			
-			if(key >= frmAnt){
-				
-				muestroFrame(pl.get(key));
-				frmAnt = key;
-			
-			}
-			packPend.remove(key);
-		
-		}
-		
-	}
 	
 	void muestroFrame(byte[] message){
 		
