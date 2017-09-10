@@ -33,6 +33,7 @@ public class PanelBotonesCliente extends JPanel {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				principal.iniciar();
+				principal.dispose();
 			}
 		});
 		add(btnAceptar);
