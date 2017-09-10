@@ -39,7 +39,7 @@ public class Cliente extends JFrame  {
 	    
 	}
 	 
-	public void clienteTCP() throws Exception{
+	public void clienteTCP() throws Exception {
 				
     	ClienteTCPManager ctcp = new ClienteTCPManager(host, puerto);
     	ctcp.start();

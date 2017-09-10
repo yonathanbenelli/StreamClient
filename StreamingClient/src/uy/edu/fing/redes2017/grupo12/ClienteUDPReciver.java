@@ -11,16 +11,11 @@ public class ClienteUDPReciver  extends Thread{
     
 
 	private DatagramSocket socketCliente;
-//	private InetAddress dirSer ;
-//	private int puerto ;
 	private ClienteUDPManager cudpm;
-//	private DisplayFrameJFrame jframe;
 	
 	public ClienteUDPReciver(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
 
 		this.socketCliente = s;
-//		this.dirSer = h;
-//		this.puerto = p;
 		this.cudpm = cudpm;
 	
 	}
@@ -40,8 +35,6 @@ public class ClienteUDPReciver  extends Thread{
 					byte[] recived = pr.getData();
 
 				    DataInputStream di = new DataInputStream(new ByteArrayInputStream(recived));
-				    Long nump = di.readLong();
-				    
 				    byte[] message = new byte[65000];
 				    di.read(message);
 				    

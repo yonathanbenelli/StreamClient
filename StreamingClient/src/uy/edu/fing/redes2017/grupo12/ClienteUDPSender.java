@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.concurrent.TimeUnit;
 
 public class ClienteUDPSender extends Thread {
     
@@ -40,21 +39,15 @@ public class ClienteUDPSender extends Thread {
 			}
 				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
-			
 				
-				try {
-					socketCliente.send(pe);
-					Thread.sleep(30000);
-					
-				} catch (IOException | InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			
-		
-		
-			
+			try {
+				socketCliente.send(pe);
+				Thread.sleep(30000);	
+			} catch (IOException | InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
 		}
 				
 	}

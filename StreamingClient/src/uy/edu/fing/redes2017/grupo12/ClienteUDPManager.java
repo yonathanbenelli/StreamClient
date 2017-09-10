@@ -4,9 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;

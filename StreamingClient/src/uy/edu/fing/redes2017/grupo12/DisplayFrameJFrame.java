@@ -14,6 +14,7 @@ public class DisplayFrameJFrame extends JFrame{
 	private  BufferedImage image;
 	
 	public DisplayFrameJFrame(){
+		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setBounds(100, 100, 650, 490);
@@ -34,6 +35,7 @@ public class DisplayFrameJFrame extends JFrame{
     public void nuevoFrame(BufferedImage i){	
     
     	image=i;
+	    setSize(i.getWidth(), i.getHeight());
     	repaint();
     
     }
