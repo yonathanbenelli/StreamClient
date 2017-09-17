@@ -11,15 +11,13 @@ public class ClienteUDPSender extends Thread {
 	private DatagramSocket socketCliente;
 	private InetAddress dirSer ;
 	private int puerto ;
-	//private ClienteUDPManager cudpm;
 	private boolean inicio=false;
 	
-	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
+	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p){
 		
 		this.socketCliente = s;
 		this.dirSer = h;
 		this.puerto = p;
-		//this.cudpm = cudpm;
 		
 	}
 
@@ -35,16 +33,14 @@ public class ClienteUDPSender extends Thread {
 				this.inicio=true;
 			
 			} else{
-				msg=("renovar");	
+				msg=("pido frame");	
 			}
 				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
 				
 			try {
-				socketCliente.send(pe);
-				Thread.sleep(30000);	
-			} catch (IOException | InterruptedException e) {
-				// TODO Auto-generated catch block
+				socketCliente.send(pe);	
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 						

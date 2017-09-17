@@ -35,10 +35,12 @@ public class ClienteUDPManager extends Thread{
 	public void run(){
 				
 		
-		ClienteUDPSender cs = new ClienteUDPSender(socketCliente, dirSer, puerto, this);
+		ClienteUDPSender cs = new ClienteUDPSender(socketCliente, dirSer, puerto);
 		cs.start();
 		ClienteUDPReciver cr = new ClienteUDPReciver(socketCliente, dirSer, puerto, this);
 		cr.start();
+		ClienteUDPKeepAlive ka = new ClienteUDPKeepAlive(socketCliente, dirSer, puerto);
+		ka.start();
 	
 	}
 

@@ -7,6 +7,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+
 public class ClienteUDPReciver  extends Thread{
     
 
@@ -33,7 +34,7 @@ public class ClienteUDPReciver  extends Thread{
 				if(length > 0) {
 				    
 					byte[] recived = pr.getData();
-
+					
 				    DataInputStream di = new DataInputStream(new ByteArrayInputStream(recived));
 				    byte[] message = new byte[65000];
 				    di.read(message);
