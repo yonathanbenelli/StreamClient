@@ -41,6 +41,7 @@ public class Cliente extends JFrame  {
 	}
 	public void fin()
 	{
+		if(ctcp!=null)
 		ctcp.fin();
 	}
 	 
