@@ -14,6 +14,7 @@ public class ClienteUDPReciver  extends Thread{
 	private DatagramSocket socketCliente;
 	private ClienteUDPManager cudpm;
 	
+	
 	public ClienteUDPReciver(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
 
 		this.socketCliente = s;

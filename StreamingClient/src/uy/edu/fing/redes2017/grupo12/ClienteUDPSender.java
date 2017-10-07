@@ -1,7 +1,6 @@
 package uy.edu.fing.redes2017.grupo12;
 
 import java.io.IOException;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -12,6 +11,7 @@ public class ClienteUDPSender extends Thread {
 	private InetAddress dirSer ;
 	private int puerto ;
 	private boolean inicio=false;
+	private long fps=10;
 	
 	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p){
 		
@@ -31,21 +31,39 @@ public class ClienteUDPSender extends Thread {
 				
 				msg=("inicio");
 				this.inicio=true;
-			
+
 			} else{
-				msg=("pido frame");	
+				msg=("pido frame");
 			}
-				
+			
+			
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
 				
-			try {
-				socketCliente.send(pe);	
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				
+				try {
+					socketCliente.send(pe);
+					Thread.sleep(1000/fps);
+					
+				} catch (IOException | InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			
+			
+				
+			
 						
 		}
 				
 	}
+
+	public long getFps() {
+		return fps;
+	}
+
+	public void setFps(long fps) {
+		this.fps = fps;
+	}
+	
 	
 }
