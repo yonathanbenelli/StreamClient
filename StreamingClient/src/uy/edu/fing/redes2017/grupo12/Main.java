@@ -7,8 +7,13 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+	
 		InterfazClientePrincipal frame = new InterfazClientePrincipal();
 		frame.setVisible(true);
+		ShutdownHook stdh2 = new ShutdownHook(frame);
+		stdh2.attachShutDownHook();
+	
 	}
 
 }

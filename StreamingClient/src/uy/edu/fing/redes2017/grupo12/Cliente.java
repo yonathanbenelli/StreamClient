@@ -14,6 +14,7 @@ public class Cliente extends JFrame  {
 	private String host;
 	private int puerto;
 	private static JFrame frameVideo;
+	private ClienteTCPManager ctcp ;
 	
 	public Cliente(int puerto, String host){
 		
@@ -38,10 +39,14 @@ public class Cliente extends JFrame  {
 	    frameVideo.setVisible(true);
 	    
 	}
+	public void fin()
+	{
+		ctcp.fin();
+	}
 	 
 	public void clienteTCP() throws Exception {
 				
-    	ClienteTCPManager ctcp = new ClienteTCPManager(host, puerto);
+    	 ctcp = new ClienteTCPManager(host, puerto);
     	ctcp.start();
     	frameVideo.dispose(); 
 		

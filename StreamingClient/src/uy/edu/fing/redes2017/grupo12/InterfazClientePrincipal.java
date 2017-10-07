@@ -37,6 +37,10 @@ public class InterfazClientePrincipal extends JFrame {
 		contentPane.add(panelBotonesCliente, BorderLayout.SOUTH);
 	}
 
+	public void fin()
+	{
+		cliente.fin();
+	}
 	public PanelClienteDatos getPanelClienteDatos() {
 		return panelClienteDatos;
 	}

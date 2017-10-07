@@ -14,7 +14,7 @@ public class ClienteTCPManager extends Thread {
     
 	private DisplayFrameJFrame jframe ;
 	private Socket socketCliente ;
-	
+	private volatile Boolean fin=false;
 	public ClienteTCPManager(String host, int puerto) throws Exception  {
 		
 		jframe = new DisplayFrameJFrame();
@@ -22,18 +22,34 @@ public class ClienteTCPManager extends Thread {
 	    jframe.setTitle("TCP");
 	    
 		socketCliente = new Socket(host, puerto);
+		this.socketCliente.setSoLinger(true,1);
 		socketCliente.setKeepAlive(true);
 		
 	}
 
+	public void fin()
+	{
+		fin=true;
+		try {
+			Thread.sleep(100);
+			socketCliente.close();
+		} catch (InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("FIN: clienteTCPManager");
+	}
 	@Override
 	public void run() {
 		
-		while (true){
+		while (!fin){
 		
 			try {
 				
+					
 				DataInputStream dIn = new DataInputStream(socketCliente.getInputStream());
+				
 				int length = dIn.readInt();
 				if(length>0) {
 					
@@ -51,8 +67,10 @@ public class ClienteTCPManager extends Thread {
 				
 				};
 				
+				
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Cierre conexion servidor");
+				fin();
 			}
 			
 		}		
