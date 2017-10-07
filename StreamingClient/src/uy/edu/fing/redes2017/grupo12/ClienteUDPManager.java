@@ -31,8 +31,8 @@ public class ClienteUDPManager extends Thread{
 	
 	}
 
-	@Override
-	public void run(){
+	
+	public void iniciar(){
 				
 		
 		ClienteUDPSender cs = new ClienteUDPSender(socketCliente, dirSer, puerto);

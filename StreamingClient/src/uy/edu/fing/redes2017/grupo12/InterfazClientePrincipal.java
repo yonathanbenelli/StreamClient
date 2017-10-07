@@ -39,6 +39,7 @@ public class InterfazClientePrincipal extends JFrame {
 
 	public void fin()
 	{
+		if(cliente!=null)
 		cliente.fin();
 	}
 	public PanelClienteDatos getPanelClienteDatos() {
