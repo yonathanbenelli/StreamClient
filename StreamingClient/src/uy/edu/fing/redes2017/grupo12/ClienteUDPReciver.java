@@ -13,8 +13,8 @@ public class ClienteUDPReciver  extends Thread{
 
 	private DatagramSocket socketCliente;
 	private ClienteUDPManager cudpm;
-	
-	
+	private volatile Boolean fin=false;
+		
 	public ClienteUDPReciver(DatagramSocket s,InetAddress h, int p, ClienteUDPManager cudpm){
 
 		this.socketCliente = s;
@@ -25,7 +25,7 @@ public class ClienteUDPReciver  extends Thread{
 	@Override
 	public void run() {		
 				
-		while (true){
+		while (!fin){
 	
 			DatagramPacket pr = new DatagramPacket(new byte[65000], 65000);
 			try{
@@ -51,5 +51,18 @@ public class ClienteUDPReciver  extends Thread{
 		}		
 
 	}
+
+	public void fin()
+	{
+		this.fin=true;
+	}
+	public Boolean getFin() {
+		return fin;
+	}
+
+	public void setFin(Boolean fin) {
+		this.fin = fin;
+	}
+	
 	
 }

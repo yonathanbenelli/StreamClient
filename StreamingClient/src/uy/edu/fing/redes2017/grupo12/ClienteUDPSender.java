@@ -11,7 +11,8 @@ public class ClienteUDPSender extends Thread {
 	private InetAddress dirSer ;
 	private int puerto ;
 	private boolean inicio=false;
-	private long fps=10;
+	private volatile Boolean fin=false;
+	
 	
 	public ClienteUDPSender(DatagramSocket s,InetAddress h, int p){
 		
@@ -24,46 +25,41 @@ public class ClienteUDPSender extends Thread {
 	@Override
 	public void run(){
 		
-		while (true){ 
+		while (!fin){ 
 			
 			String msg;
 			if (!inicio){
 				
 				msg=("inicio");
 				this.inicio=true;
-
+			
 			} else{
-				msg=("pido frame");
+				msg=("pido frame");	
 			}
-			
-			
+				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
 				
-				
-				try {
-					socketCliente.send(pe);
-					Thread.sleep(1000/fps);
-					
-				} catch (IOException | InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-			
-			
-				
-			
-						
+			try {
+				socketCliente.send(pe);
+				Thread.sleep(1000/30);
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+
 		}
 				
 	}
-
-	public long getFps() {
-		return fps;
+	
+	public void fin()
+	{
+		this.fin=true;
+	}
+	public Boolean getFin() {
+		return fin;
 	}
 
-	public void setFps(long fps) {
-		this.fps = fps;
+	public void setFin(Boolean fin) {
+		this.fin = fin;
 	}
-	
-	
+
 }

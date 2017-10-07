@@ -15,7 +15,7 @@ public class Cliente extends JFrame  {
 	private int puerto;
 	private static JFrame frameVideo;
 	private ClienteTCPManager ctcp ;
-	
+	private ClienteUDPManager cudp;	
 	public Cliente(int puerto, String host){
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,6 +43,8 @@ public class Cliente extends JFrame  {
 	{
 		if(ctcp!=null)
 		ctcp.fin();
+		if(cudp!=null)
+			cudp.fin();
 	}
 	 
 	public void clienteTCP() throws Exception {
@@ -55,7 +57,7 @@ public class Cliente extends JFrame  {
 	
 	public void clienteUDP() throws Exception{
 		
-		ClienteUDPManager cudp=new ClienteUDPManager(host, puerto);
+ cudp=new ClienteUDPManager(host, puerto);
 		cudp.start();
 		frameVideo.dispose();
 		

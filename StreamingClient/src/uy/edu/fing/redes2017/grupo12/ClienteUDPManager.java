@@ -19,7 +19,9 @@ public class ClienteUDPManager extends Thread{
 	InetAddress dirSer;
 	int puerto;
 	long frmAnt = 0;
-	
+	ClienteUDPSender cs;
+	ClienteUDPReciver cr;
+	ClienteUDPKeepAlive ka;
 	public ClienteUDPManager(String host, int puerto) throws Exception{
 		
 		jframe = new DisplayFrameJFrame();
@@ -31,15 +33,15 @@ public class ClienteUDPManager extends Thread{
 	
 	}
 
-	
-	public void iniciar(){
+	@Override
+	public void run(){
 				
 		
-		ClienteUDPSender cs = new ClienteUDPSender(socketCliente, dirSer, puerto);
+		 cs = new ClienteUDPSender(socketCliente, dirSer, puerto);
 		cs.start();
-		ClienteUDPReciver cr = new ClienteUDPReciver(socketCliente, dirSer, puerto, this);
+		 cr = new ClienteUDPReciver(socketCliente, dirSer, puerto, this);
 		cr.start();
-		ClienteUDPKeepAlive ka = new ClienteUDPKeepAlive(socketCliente, dirSer, puerto);
+		 ka = new ClienteUDPKeepAlive(socketCliente, dirSer, puerto);
 		ka.start();
 	
 	}
@@ -56,6 +58,15 @@ public class ClienteUDPManager extends Thread{
 	    img.get(0,0,((DataBufferByte)image.getRaster().getDataBuffer()).getData()); // get all the pixels
 	    jframe.nuevoFrame(image);
 	    
+	}
+	public void fin()
+	{
+		if(cs!=null)
+		cs.fin();
+		if(cr!=null)
+		cr.fin();
+		if(ka!=null)
+		ka.fin();
 	}
 
 }

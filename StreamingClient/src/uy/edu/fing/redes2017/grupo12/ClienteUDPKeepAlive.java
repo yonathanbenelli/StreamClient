@@ -10,6 +10,7 @@ public class ClienteUDPKeepAlive extends Thread{
 	private DatagramSocket socketCliente;
 	private InetAddress dirSer ;
 	private int puerto;
+	private volatile Boolean fin=false;
 	
 	ClienteUDPKeepAlive(DatagramSocket socketCliente, InetAddress dirSer, int puerto){
 		this.socketCliente = socketCliente;
@@ -20,7 +21,7 @@ public class ClienteUDPKeepAlive extends Thread{
 	@Override
 	public void run(){
 		
-		while (true){ 
+		while (!fin){ 
 			
 			String msg = "renovar";				
 			DatagramPacket pe= new DatagramPacket(msg.getBytes(), msg.length(), dirSer, puerto);
@@ -36,4 +37,8 @@ public class ClienteUDPKeepAlive extends Thread{
 				
 	}
 	
+	public void fin()
+	{
+		this.fin=true;
+	}
 }
